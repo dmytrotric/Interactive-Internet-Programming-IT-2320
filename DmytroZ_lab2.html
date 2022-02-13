@@ -4,29 +4,30 @@
    <title>Fibonacci Sequence</title> 
    <script>
        "use strict"
-       var numFib = prompt("How many numbers in the sequence?"); 
-	   numFib = parseFloat(numFib);
-	   
-	  
-	   
-       if () {
-          alert("The sequence must have 3 or more numbers.");
-       } else {
-	      var myFib = [];  // declare the array
-		  myFib[0] = 0;
-		  myFib[1] = 1;
-		  // fill the array
-		  for () {
-		     ...
-		  }
-		  // write out the results
-		  for () {
-		     ...
-		  }
+	   while (true) {
+		   var numFib = prompt("How many numbers in the sequence?");
+		   numFib = parseFloat(numFib);
+		   if (numFib >= 3) break;
+           alert("The sequence must have 3 or more numbers.");
 	   }
-	   // calculate the ratio
-	   var ratio = ...
-	   document.write("Ratio: " + ratio);
+
+	   var i;
+
+	   var myFib = [];  // declare the array
+	   myFib[0] = 0;
+	   myFib[1] = 1;
+
+	   // fill the array
+	   for(i = 2; i < numFib; i++)
+	       myFib.push(myFib[i - 1] + myFib[i - 2]);
+
+	   // write out the results
+	   for(i = 0; i < numFib; i++)
+		   document.write(myFib[i] + "<br/>");
+
+       // calculate the ratio
+       var ratio = (myFib[numFib - 1] / myFib[numFib - 2]);
+       document.write("Ratio: " + ratio);
 	</script>
 </head> 
 <body>
