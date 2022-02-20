@@ -7,7 +7,7 @@
 			return document.getElementById(id);
 		};
 		function calcFactorial(myNum) {
-			// calculate the factorial and return that value
+	    // calculate the factorial and return that value
 			var myFact = myNum;
 			if (myNum === 0 || myNum === 1) 
 				return 1;
@@ -18,13 +18,13 @@
             return myFact;
 		}
 		function calculate() {
-			// get the number entered into the text box myNum
+	    // get the number entered into the text box myNum
 			var myNum = $("myNum").value;
-			// call the factorial function
+	    // call the factorial function
 			var fact = calcFactorial(myNum);
             // calculate the square of the number
 			var sq = myNum * myNum;
-			// display those values in the proper place in the HTML
+	    // display those values in the proper place in the HTML
 			$("mySquare").value = sq;
 			$("myFactorial").value = fact;
         }
@@ -32,7 +32,7 @@
 			$("goCalculate").onclick = calculate;
 			$("myNum").focus();
 		};
-	</script>
+        </script>
 </head>
 <body>
 	<main>
