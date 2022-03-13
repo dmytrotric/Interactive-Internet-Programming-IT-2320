@@ -3,61 +3,72 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <style>
-    .numberKey {width:150px; 
-			height:125px; 	
-			background:#285DC8; 
-			color:#FFFF00; 
-			font-size:48px;
-			font-weight:bold;
-			padding-top:25px;
-            text-align:center }
+    .numberKey {
+        width: 150px;
+        height: 90px;
+        background: #285DC8;
+        color: #FFFF00;
+        font-size: 48px;
+        font-weight: bold;
+        padding-top: 25px;
+        text-align: center
+    }
 	div.numberKey:hover {background:#487DE8;}
-			
-	.actionKey {width:150px; 
-			height:125px; 	
-			background:#285DC8; 
-			color:#FFFF00; 
-			font-size:48px;
-			font-weight:bold;
-			padding-top:25px;
-            text-align:center }
+
+    .actionKey {
+        width: 150px;
+        height: 90px;
+        background: #285DC8;
+        color: #FFFF00;
+        font-size: 48px;
+        font-weight: bold;
+        padding-top: 25px;
+        text-align: center
+    }
 	div.actionKey:hover {background:#487DE8;}
-	
-	.equalKey {width:150px; 
-			height:125px; 	
-			background:#285DC8; 
-			color:#FFFF00; 
-			font-size:48px;
-			font-weight:bold;
-			padding-top:25px;
-            text-align:center }
+
+    .equalKey {
+        width: 150px;
+        height: 90px;
+        background: #285DC8;
+        color: #FFFF00;
+        font-size: 48px;
+        font-weight: bold;
+        padding-top: 25px;
+        text-align: center
+    }
 	div.equalKey:hover {background:#487DE8;}
 
-    .blankKey {width:150px; 
-			height:125px; 	
-			background:#285DC8; 
-			color:#FFFF00; 
-			font-size:48px;
-			font-weight:bold;
-			padding-top:25px;
-            text-align:center }
+    .blankKey {
+        width: 150px;
+        height: 90px;
+        background: #285DC8;
+        color: #FFFF00;
+        font-size: 48px;
+        font-weight: bold;
+        padding-top: 25px;
+        text-align: center
+    }
 
-	.disableKey {width:150px; 
-			height:125px; 	
-			background:#777777; 
-			color:#FFFF00; 
-			font-size:48px;
-			font-weight:bold;
-			padding-top:25px;
-            text-align:center }
+    .disableKey {
+        width: 150px;
+        height: 90px;
+        background: #777777;
+        color: #FFFF00;
+        font-size: 48px;
+        font-weight: bold;
+        padding-top: 25px;
+        text-align: center
+    }
 	
-	.answerDisplay {width:610px; 
-			height:125px; 	
-			background:#285DC8; 
-			color:#FFFF00; 
-			font-size:48px;
-			font-weight:bold;
-			padding-top:25px;
+    .answerDisplay {
+	    width:610px; 
+	    height:90px; 	
+	    background:#285DC8; 
+	    color:#FFFF00; 
+	    font-size:48px;
+	    font-weight:bold;
+	    padding-top:25px;
             text-align:center }
 </style>
 <script>
@@ -74,6 +85,14 @@
 	  step = 1;
 	  keyStr = "";
    });
+   
+	function toggleActionKeys() {
+		$("#multiply").toggleClass("disableKey");
+                $("#plus").toggleClass("disableKey");
+                $("#minus").toggleClass("disableKey");
+                $("#divide").toggleClass("disableKey");
+                $("#modulo").toggleClass("disableKey");
+	};
 
    function cClick(cKey) {
       if (step == 1) {
@@ -81,7 +100,7 @@
 	     if (isNaN(cKey)) {
 		    // an action key was clicked - save what operation they clicked
 	        if (keyStr=="") {
-			   ; // num1 should be the past answer
+			   num1 = answerNum; // num1 should be the past answer
 			} else {
 			   num1 = parseInt(keyStr);
 			}
@@ -90,16 +109,16 @@
 			step = 2;
 			// they keyed in the first number and 
 			// selected what operation
-			// let's disable the action (+ - * /) keys
+			// let's disable the action (+ - * / %) keys
 			// *** For the action keys (class=actionKey) change the class to disableKey so the keys are grayed out
+			 toggleActionKeys();
 
 	      } else {
-	         keyStr += cKey;
+			 keyStr += cKey;
 			 // *** output the keyStr variable in the display area
-			 
+			 $("#display").html(keyStr);
 			 // *** be sure it is within this else clause
-		  }
-		  
+		  }		  
 		 
 	   } else {
 	      // step 2 - getting second number
@@ -107,34 +126,43 @@
 		     // equal key clicked
 		     num2 = parseInt(keyStr);
 			 // perform the operation they clicked
-			 if (cAction=="plus") {
-			    answerNum = num1 + num2;
-			 } else if (cAction=='minus') {
-			    answerNum = num1 - num2;
-			} else if (cAction=='multiply') {
-			    answerNum = num1 * num2;	
-			} else if (cAction=='divide') {
-			    if (num2==0) {
-				   answerNum = "undefined";
-				} else {
-			       answerNum = num1 / num2;
-				}
-		    }
-			// *** display the final answer in the display area
-			
+			  if (cAction == "plus") {
+				  answerNum = num1 + num2;
+			  } else if (cAction == 'minus') {
+				  answerNum = num1 - num2;
+			  } else if (cAction == 'multiply') {
+				  answerNum = num1 * num2;
+			  } else if (cAction == 'divide') {
+				  if (num2 == 0) {
+					  answerNum = "undefined";
+				  } else {
+					  answerNum = num1 / num2;
+				  }
+			  } else if (cAction == 'modulo') {
+                  if (num2 == 0) {
+                      answerNum = "undefined";
+                  } else {
+                      answerNum = num1 % num2;
+                  }
+              }
+			  // *** display the final answer in the display area
+			  $("#display").html(answerNum.toString());
+
 			// reset all the variables to start over
 			num1 = answerNum; // put answer in num1 for next round 
 			num2 = 0;
 			keyStr = "";
 			cAction = "";
 			step = 1;
-			// we had grayed out the action keys (+ - * /) earlier
-			// *** set the class on the action keys back to the class actionKey
+			// we had grayed out the action keys (+ - * / %) earlier
+			  // *** set the class on the action keys back to the class actionKey
+			  toggleActionKeys();
             
 		} else if (!isNaN(cKey)) {
 		     // they clicked on a number key
 		     keyStr += cKey;
 			 // *** display the number (keyStr) in the display area
+			  $("#display").html(keyStr);
 			 
 		}
    }
@@ -143,7 +171,7 @@
 </script>
 </head>
 <body>
-<h2>Your Name - IT 2320 - Lab 6 jQuery Calculator</h2>
+<h2>DmytroZ - IT 2320 - Lab 6 jQuery Calculator</h2>
 <table>
 	<tr>
 	   <td colspan="4"><div class="answerDisplay" id="display">0</div></td>
@@ -167,7 +195,7 @@
 	   <td><div class="actionKey" id="multiply" onclick="cClick('multiply')">X</div></td>
 	</tr>
 	<tr>
-	   <td><div class="blankKey" id="blank">&nbsp;</div></td>
+	   <td><div class="blankKey" id="modulo" onclick="cClick('modulo')">%</div></td>
 	   <td><div class="numberKey" id="0" onclick="cClick(0)">0</div></td>
 	   <td><div class="equalKey" id="equal" onclick="cClick('equal')">=</div></td>
 	   <td><div class="actionKey" id="divide" onclick="cClick('divide')">/</div></td>
