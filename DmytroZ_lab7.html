@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Walking guy</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        
+        #walking_guy {
+            width: 400px;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            display: none;
+        }
+      
+    </style>
+
+    <script>
+       
+        function go() {                     
+            rightmost_pos = $(window).width() - 400;
+            pic = $("#walking_guy");
+            pic.fadeIn(1000);
+            
+            pic.animate(
+                { left: rightmost_pos },
+                3000,
+                function () {
+                    pic.css({ transform: 'scaleX(-1)' });
+                }
+            );
+            
+            pic.animate({ left: 0 }, 3000);
+            pic.fadeOut(1000, "swing",
+                function () { pic.css({ transform: 'scaleX(1)' }); }
+            );
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <h2>DmytroZ - IT 2320 - Lab 7 Walking guy</h2>
+    <button id="start" onclick="go()">Start</button>
+    
+    <div>
+        <img id="walking_guy" src="guy-walking.gif" />
+    </div>
+
+</body>
+</html>
+
 
