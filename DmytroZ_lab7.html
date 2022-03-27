@@ -5,51 +5,50 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <style>
-        
-        #walking_guy {
+
+        .img {
             width: 400px;
             position: absolute;
             top: 50px;
             left: 0;
             display: none;
         }
-      
-    </style>
+    </style>    
 
     <script>
-       
-        function go() {                     
-            rightmost_pos = $(window).width() - 400;
-            pic = $("#walking_guy");
-            pic.fadeIn(1000);
-            
-            pic.animate(
-                { left: rightmost_pos },
-                3000,
-                function () {
-                    pic.css({ transform: 'scaleX(-1)' });
-                }
-            );
-            
-            pic.animate({ left: 0 }, 3000);
-            pic.fadeOut(1000, "swing",
-                function () { pic.css({ transform: 'scaleX(1)' }); }
-            );
-        }
 
+        $(document).ready(function () {
+            var img = $('#walking_guy');
+            $("#start").click(function () {
+                img.fadeIn(1000, function () {
+
+                    img.animate({
+                        left: $(window).width() - 400
+                    }, 3000, function () {
+
+                        $("#walking_guy").css({
+                            '-webkit-transform': 'scaleX(-1)',
+                            'transform': 'scaleX(-1)'
+                        });
+
+                        img.animate({
+                            left: '0px'
+                        }, 3000, function () {
+                            img.fadeOut(1000);
+                        });
+                    });
+                });
+            });
+        });
+        
     </script>
 </head>
 
 <body>
-
-    <h2>DmytroZ - IT 2320 - Lab 7 Walking guy</h2>
-    <button id="start" onclick="go()">Start</button>
     
-    <div>
-        <img id="walking_guy" src="guy-walking.gif" />
-    </div>
+    <h2>DmytroZ - IT 2320 - Lab 7 Walking guy</h2>
+    <button id="start">Start</button>
+    <image class="img" id="walking_guy" src="guy-walking.gif"></image>
 
 </body>
 </html>
-
-
