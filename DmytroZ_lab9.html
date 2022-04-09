@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>     
+        $(document).ready(function () {
+            $("button").click(function () {
+                var zipcode = $("#zipCode").val();
+                var url = "https://api.openweathermap.org/data/2.5/weather?zip=" + zipcode +
+                    ",us&appid=713ce44bfb230fe3900c7a91cb5120a2&units=imperial";
+                $.ajax({
+                    method: "GET",
+                    url: url,           
+                    dataType: "json"
+                }).done(function (response) {
+                    $('#city').html(response.name);
+                    $('#currentCond').html(response.weather.main);
+                    $('#temperature').html(parseInt(response.main.temp));                    
+                    $('#windSpeed').html(parseInt(response.wind.speed));
+                    $('#windDirect').html(response.wind.deg);
+                    $('#humidity').html(response.main.humidity);
+                    $('#mintemp').html(parseInt(response.main.temp_min));
+                    $('#maxtemp').html(parseInt(response.main.temp_max));
+                    });
+            });
+        });
+    </script>
+
+    <title></title>
+</head>
+<body>
+    <h2>DmytroZ - IT 2320 - Lab 9 - Weather API</h2>
+
+    <input type="text" placeholder="enter ZIP code" id="zipCode" />
+    <button>Weather</button>
+    <table id="description">
+        <tr>
+            <td>City :</td>
+            <td id="city"></td>
+        </tr>
+        <tr>
+            <td>The current condition :</td>
+            <td id="currentCond"></td>
+        </tr>
+        <tr>
+            <td>Temperature, Fahrenheit :</td>
+            <td id="temperature"></td>
+        </tr>
+        <tr>
+            <td>Wind Speed, miles/hour :</td>
+            <td id="windSpeed"></td>
+        </tr>
+        <tr>
+            <td>Wind direction, degrees :</td>
+            <td id="windDirect"></td>
+        </tr>
+        <tr>
+            <td>Humidity, % :</td>
+            <td id="humidity"></td>
+        </tr>
+        <tr>
+            <td>Min temp, Fahrenheit :</td>
+            <td id="mintemp"></td>
+        </tr>
+        <tr>
+            <td>Max temp, Fahrenheit :</td>
+            <td id="maxtemp"></td>
+        </tr>
+    </table>
+
+</body>
+</html>
