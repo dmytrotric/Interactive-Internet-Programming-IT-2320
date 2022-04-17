@@ -1,15 +1,59 @@
 <html>
 <head>
-<script>
-    // script 
-</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script>
+   
+        window.addEventListener('load', () => {
+            document.getElementById('submit').addEventListener('click', () => {
+
+                let numDays = document.getElementById('numDays').value;
+                let dateModified = document.getElementById('dateModified')
+                let current_date = new Date;
+                current_date.setDate(current_date.getDate() + parseInt(numDays));
+                dateModified.innerText = current_date.getMonth() + '/' + current_date.getDate() + '/' + current_date.getFullYear();
+
+                let textarea = document.getElementById('textArea').value;
+                let searchChar = document.getElementById('searchChar').value;
+                const regexp = new RegExp(searchChar + '|' + searchChar.toLowerCase(), 'g');
+                let words = document.getElementById('words');
+                words.innerText = textarea.split(' ').length;
+              
+                let occurances = document.getElementById('occurances');
+                occurances.innerText = (textarea.match(regexp)).length;               
+
+                let caps = document.getElementById('caps');
+                caps.innerText = textarea.toUpperCase();
+
+                let removed = document.getElementById('removed');
+                removed.innerText = textarea.replace(regexp, '')
+
+                             
+            })
+
+            document.getElementById('reset').addEventListener('click', () => {
+
+                let words = document.getElementById('words');
+                let occurances = document.getElementById('occurances');
+                let caps = document.getElementById('caps');
+                let removed = document.getElementById('removed');
+                let dateModified = document.getElementById('dateModified');
+                words.innerText = '';
+                occurances.innerText = '';
+                caps.innerText = ''
+                removed.innerText = '';
+                dateModified.innerText = '';
+            })
+        });
+		
+	</script>
 <style>
   table { border-collapse: separate;
           border-spacing: 15px;      }
 </style>
 </head>
 <body>
-<h2>PUT YOUR NAME HERE - IT 2320 - Lab 10</h2>
+<h2>DmytroZ - IT 2320 - Lab 10</h2>
 <h3>Working with Strings and Dates</h3>
 <form>
 <table>
@@ -54,27 +98,27 @@
 	</tr>
     <tr>
 	    <td>Number of words entered:</td>
-	    <td> **** </td>
+	    <td id="words"></td>
 	</tr>
 	<tr>
 	    <td>Number of occurances of the search character:</td>
-	    <td> **** </td>
+	    <td id="occurances"></td>
 	</tr>
     <tr>
 	    <td>Display the entered text in <strong>ALL CAPS</strong>:</td>
-	    <td> **** </td>
+	    <td id="caps"></td>
 	</tr>
     <tr>
 	    <td>Display the entered text with the search character <strong>removed</strong>:</td>
-	    <td> **** </td>
+	    <td id="removed"></td>
 	</tr>
     <tr>
 	    <td>Add the number of days in Date Modifier to the current date<br/>Display the resulting date as MM/DD/YYYY:</td>
-	    <td> **** </td>
+	    <td id = "dateModified"></td>
 	</tr>
 	<tr>
-		   <td><input type="reset" id="reset" name="reset" value="Reset"></td>
-           <td><input type="submit" id="submit" name="submit" value="Submit"></td>
+		   <td><input type="reset" id="reset" name="reset" value="Reset" onclick="return true"></td>
+           <td><input type="submit" id="submit" name="submit" value="Submit" onclick="return false"></td>
 	</tr>
 
 </table>
