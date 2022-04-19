@@ -9,7 +9,7 @@
 
                 let numDays = document.getElementById('numDays').value;
                 let dateModified = document.getElementById('dateModified')
-                let current_date = new Date;
+                const current_date = new Date;
                 current_date.setDate(current_date.getDate() + parseInt(numDays));
                 dateModified.innerText = current_date.getMonth() + '/' + current_date.getDate() + '/' + current_date.getFullYear();
 
