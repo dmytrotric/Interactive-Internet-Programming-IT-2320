@@ -5,10 +5,20 @@
 <script>		  
 var scale = ["C", "D", "E", "F", "G", "A5", "B5", "C5", "C5",  "B5",  "A5",  "G",  "F",  "E",  "D",  "C" ];
 	  
-function playSong() {
-      audios = document.getElementById("C");
-      audios.play();        
-}
+function playSound(note) {
+        return new Promise(resolve => {
+            audio = document.getElementById(note);
+            audio.onended = resolve;
+            audio.play()
+        });        
+    }
+    async function playSong() {
+        for (note of scale) {
+            document.getElementById("notes").innerHTML += note + "&nbsp;";
+            await playSound(note);
+        };
+    }
+
 </script>
 </head>
 
